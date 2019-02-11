@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Play around :)
+Walking near water should turn it to lava
 """
 
 import mcpi.minecraft as minecraft
@@ -17,7 +17,7 @@ mc.postToChat(__file__ + ' started: ' + \
   time.strftime('%H:%M:%S', time.gmtime()))
 
 # Larger radius increases delay before any output.
-player_radius = 3
+player_radius = 10
 
 last_x = False
 last_y = False

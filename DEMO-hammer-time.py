@@ -37,6 +37,7 @@ tool_radius = 2
 # Loop forever
 while(True):
   for hit in mc.events.pollBlockHits():
+    # mc.postToChat(hit)
     hit_block_type = mc.getBlock(hit.pos.x, hit.pos.y, hit.pos.z)
 
     if hit.face == block_faces['top'] or hit.face == block_faces['bottom']:
@@ -45,13 +46,13 @@ while(True):
                    block.AIR)
 
     if hit.face == block_faces['east'] or hit.face == block_faces['west']:
-      mc.setBlocks(hit.pos.x, hit.pos.y-tool_radius, hit.pos.z-tool_radius, \
-                   hit.pos.x, hit.pos.y+tool_radius, hit.pos.z+tool_radius, \
+      mc.setBlocks(hit.pos.x, hit.pos.y+1-tool_radius, hit.pos.z-tool_radius, \
+                   hit.pos.x, hit.pos.y+1+tool_radius, hit.pos.z+tool_radius, \
                    block.AIR)
 
     if hit.face == block_faces['north'] or hit.face == block_faces['south']:
-      mc.setBlocks(hit.pos.x-tool_radius, hit.pos.y-tool_radius, hit.pos.z, \
-                   hit.pos.x+tool_radius, hit.pos.y+tool_radius, hit.pos.z, \
+      mc.setBlocks(hit.pos.x-tool_radius, hit.pos.y+1-tool_radius, hit.pos.z, \
+                   hit.pos.x+tool_radius, hit.pos.y+1+tool_radius, hit.pos.z, \
                    block.AIR)
 
   time.sleep(0.1)

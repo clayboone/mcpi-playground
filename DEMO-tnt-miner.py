@@ -36,20 +36,9 @@ while(True):
 
     # Don't do anything if we're flying/jumping
     if blockUnderPlayer > 0:
-
-      # Loop through the blocks under the player, starting at the block under the
-      # player's feet and going towards negative y (downward)
-      for y in range(int(player_y) - 1, int(player_y) - 25, -1):
-        # Stop at bedrock
-        if y < -60:
-          continue
-
-        #Skip air blocks
-        if mc.getBlock(player_x, y, player_z) <= 0:
-          continue
-
-        # Since we haven't continued yet, set the block to TNT
-        mc.setBlock(player_x, y, player_z, block.TNT)
+      mc.setBlocks(player_x, player_y-1, player_z, \
+                   player_x, player_y-25, player_z, \
+                   block.TNT)
 
       # Save rounded player position for next iteration (optimization)
       last_player_x = player_x
