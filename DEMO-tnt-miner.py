@@ -36,8 +36,14 @@ while(True):
 
     # Don't do anything if we're flying/jumping
     if blockUnderPlayer > 0:
-      mc.setBlocks(player_x, player_y-1, player_z, \
-                   player_x, player_y-25, player_z, \
+      # setBlocks() (note the 's') works differently than setBlock()
+      # it doens't think that y=0 is 64 like mcpi.Minecraft.setBlock() does
+      # so no real math is required here.. just set the level you want to stop
+      # at.
+      bedrock = 11
+
+      mc.setBlocks(player_x-1, player_y-1, player_z-1, \
+                   player_x+2, bedrock, player_z+1, \
                    block.TNT)
 
       # Save rounded player position for next iteration (optimization)
