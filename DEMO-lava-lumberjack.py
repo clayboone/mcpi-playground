@@ -31,18 +31,14 @@ block_faces = {
   5: 'east'
 }
 
-tool_width = 1
-tool_height = 1
-tool_depth = 1
+tool_width = 3
+tool_height = 10
+tool_depth = 10
 
-# replacement_block = block.AIR
 replacement_block = block.LAVA
+# replacement_block = block.GLASS
 
 wood_ids = [17, 162]
-
-def find_wood_around_block(x, y, z):
-  """Recursively find wood blocks around (x, y, z)"""
-  pass
 
 def find_wood_in(x, y, z, x2, y2, z2):
   """Find wood blocks touching a cuboid"""
@@ -74,7 +70,7 @@ while(True):
       if hit.face == block_faces['east']:
         mc.postToChat('Searching eastward...')
         wood_blocks = find_wood_in(hit.pos.x,
-                                   hit.pos.y-tool_height,
+                                   hit.pos.y,
                                    hit.pos.z-tool_width,
 
                                    hit.pos.x-tool_depth,
@@ -83,7 +79,7 @@ while(True):
       elif hit.face == block_faces['west']:
         mc.postToChat('Searching westward...')
         wood_blocks = find_wood_in(hit.pos.x,
-                                   hit.pos.y-tool_height,
+                                   hit.pos.y,
                                    hit.pos.z-tool_width,
 
                                    hit.pos.x+tool_depth,
@@ -92,7 +88,7 @@ while(True):
       elif hit.face == block_faces['south']:
         mc.postToChat('Searching southward...')
         wood_blocks = find_wood_in(hit.pos.x-tool_width,
-                                   hit.pos.y-tool_height,
+                                   hit.pos.y,
                                    hit.pos.z,
 
                                    hit.pos.x+tool_width,
@@ -101,7 +97,7 @@ while(True):
       elif hit.face == block_faces['north']:
         mc.postToChat('Searching northward...')
         wood_blocks = find_wood_in(hit.pos.x-tool_width,
-                                   hit.pos.y-tool_height,
+                                   hit.pos.y,
                                    hit.pos.z,
 
                                    hit.pos.x+tool_width,
