@@ -43,7 +43,7 @@ while(True):
       bedrock = 11
 
       mc.setBlocks(player_x-1, player_y-1, player_z-1, \
-                   player_x+2, bedrock, player_z+1, \
+                   player_x+1, bedrock, player_z+1, \
                    block.TNT)
 
       # Save rounded player position for next iteration (optimization)
