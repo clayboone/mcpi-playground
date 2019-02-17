@@ -12,6 +12,22 @@ import time
 mc = minecraft.Minecraft.create()
 mc.postToChat('started: ' + time.strftime('%H:%M:%S', time.gmtime()))
 
+# Radius of tnt that the player walks on
+radius = 0
+
+# setBlocks() (note the 's') works differently than setBlock()
+# it doens't think that y=0 is 64 like mcpi.Minecraft.setBlock() does
+# so no real math is required here.. just set the level you want to stop
+# at.
+bedrock = 11
+
+# Do nothing when walking on these blocks.
+ignoreBlocks = [
+  8, # WATER_FLOWING
+  9, # WATER_STATIONARY
+  79, # ICE
+]
+
 # Set sentinel values for last_player_*
 last_player_x = False
 last_player_y = False
@@ -34,16 +50,13 @@ while(True):
 
     blockUnderPlayer = mc.getBlock(player_x, player_y - 1, player_z)
 
+    if blockUnderPlayer in ignoreBlocks:
+      continue
+
     # Don't do anything if we're flying/jumping
     if blockUnderPlayer > 0:
-      # setBlocks() (note the 's') works differently than setBlock()
-      # it doens't think that y=0 is 64 like mcpi.Minecraft.setBlock() does
-      # so no real math is required here.. just set the level you want to stop
-      # at.
-      bedrock = 11
-
-      mc.setBlocks(player_x-1, player_y-1, player_z-1, \
-                   player_x+1, bedrock, player_z+1, \
+      mc.setBlocks(player_x-radius, player_y-1, player_z-radius, \
+                   player_x+radius, bedrock, player_z+radius, \
                    block.TNT)
 
       # Save rounded player position for next iteration (optimization)
